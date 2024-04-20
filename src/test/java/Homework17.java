@@ -7,7 +7,7 @@ class Homework17 extends BaseTest {
 
     @Test
     public void addSongToPlaylist() throws InterruptedException {
-        String expectedSongAddedMessage = "Added 1 song into \"Fav Playlist,\"";
+        String expectedSongAddedMessage = "Added 1 song into \"Test Pro Playlist.\"";
         provideEmail("pearl.estrada@testpro.io");
         Thread.sleep(2000);
         providePassword("April969!!");
@@ -52,15 +52,14 @@ class Homework17 extends BaseTest {
         AddToBtn.click();
     }
 
-    private void choosePlaylist() {
-        WebElement playlist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(),'Fav Playlist'])"));
+    public void choosePlaylist() {
+        WebElement playlist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(),'Test Pro Playlist')]"));
         playlist.click();
     }
 
     public String getAddToPlaylistSuccessMsg() {
         WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
         return notification.getText();
-
     }
 
 }

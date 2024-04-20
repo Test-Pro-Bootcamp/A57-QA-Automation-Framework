@@ -31,9 +31,13 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         navigateToPage();
+    }
 
-            }
     @AfterMethod
+    public void closeBrowser() {
+        driver.quit();
+    }
+
     public void navigateToPage() {
         driver.get(url);
     }
@@ -55,8 +59,5 @@ public class BaseTest {
         WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
         submit.click();
     }
-@AfterMethod
-    public void closeBrowser() {
-        driver.quit();
-    }
 }
+
