@@ -16,6 +16,7 @@ public class LoginTests extends BaseTest {
         WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
         Assert.assertTrue(avatarIcon.isDisplayed());
     }
+
     @Test
     public void loginInvalidEmailValidPassword()throws InterruptedException {
         //navigateToLoginPage();
@@ -27,6 +28,7 @@ public class LoginTests extends BaseTest {
         Thread.sleep(2000);
         Assert.assertEquals(driver.getCurrentUrl(),url);
     }
+
     @Test
     public void loginValidEmailEmptyPassword() throws InterruptedException {
         //navigateToLoginPage();
