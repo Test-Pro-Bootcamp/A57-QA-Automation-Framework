@@ -40,4 +40,5 @@ public class LoginTests extends BaseTest {
         Thread.sleep(2000);
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
+
 }

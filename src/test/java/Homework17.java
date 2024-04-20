@@ -61,5 +61,4 @@ class Homework17 extends BaseTest {
         WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
         return notification.getText();
     }
-
 }
