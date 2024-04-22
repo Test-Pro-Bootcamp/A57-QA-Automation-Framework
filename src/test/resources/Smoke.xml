@@ -1,0 +1,13 @@
+</suite>
+    </test>
+        </classes>
+            </class>
+                </methods>
+                    <include name="LoginTests"/>
+                <methods>
+            <class name="LoginTests">
+        <classes>
+    <test name="Smoke Test" preserve-order="false">
+<suite name="Smoke">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
