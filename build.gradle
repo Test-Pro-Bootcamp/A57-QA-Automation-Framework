@@ -15,8 +15,15 @@ dependencies {
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.7.0'
 }
 
+test{
+    useTestNG(){
+        suites "src/test/resources/HomeWork24.xml"
+    }
+}
 test {
     useTestNG() {
+        //suites "src/test/resources/HomeWork17.xml"
         suites "src/test/resources/TestNG.xml"
+        systemProperty "browser", System.getProperty("browser")
     }
 }
