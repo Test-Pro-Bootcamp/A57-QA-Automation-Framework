@@ -1,25 +1,49 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
+import pageObjects.HomePage;
+import pageObjects.LoginPage;
 
 public class LoginTests extends BaseTest {
+
     @Test
-    public void loginEmptyEmailPassword() {
-
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+    public void loginValidEmailPassword() {
+        provideEmail("pearl.estrada@testpro.io");
+        providePassword("April969!!");
+        clickLoginBtn();
+        WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
+        Assert.assertTrue(avatarIcon.isDisplayed());
     }
+
+    @Test
+    public void loginInvalidEmailValidPassword() {
+        navigateToPage();
+        provideEmail("email@test.com");
+        providePassword("April969!!");
+        clickLoginBtn();
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+    }
+
+    @Test
+    public void loginValidEmailEmptyPassword() {
+        navigateToPage();
+        provideEmail("pearl.estrada@testpro.io");
+        providePassword(" ");
+        clickLoginBtn();
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+    }
+
+    @Test
+    public void loginValidEmailValidPasswordTest() {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.provideEmail("pearl.estrada@testpro.io");
+        loginPage.providePassword("April969!!");
+        loginPage.clickSubmit();
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+
 }
