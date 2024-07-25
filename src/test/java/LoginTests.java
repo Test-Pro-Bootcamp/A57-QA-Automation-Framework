@@ -3,23 +3,47 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+import pages.HomePage;
+import pages.LoginPage;
 import java.time.Duration;
 
 public class LoginTests extends BaseTest {
+
+    // Positive Test Case
     @Test
-    public void loginEmptyEmailPassword() {
+    public void validEmailValidPasswordTest() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        loginPage.provideEmail("elliott.nance@testpro.io");
+        loginPage.providePassword("HondaAccord2024$");
+        loginPage.clickSubmit();
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+    // Negative Test Cases
+    @Test
+    public void invalidEmailValidPasswordTest() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.provideEmail("invalid.email@testpro.io");
+        loginPage.providePassword("HondaAccord2024$");
+        loginPage.clickSubmit();
+        Assert.assertTrue(loginPage.isErrorDisplayed());
+    }
+    @Test
+    public void validEmailInvalidPasswordTest() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.provideEmail("elliott.nance@testpro.io");
+        loginPage.providePassword("invalidpassword");
+        loginPage.clickSubmit();
+        Assert.assertTrue(loginPage.isErrorDisplayed());
+    }
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+    @Test
+    public void emptyEmailPasswordTest() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.provideEmail("");
+        loginPage.providePassword("");
+        loginPage.clickSubmit();
+        Assert.assertTrue(loginPage.isErrorDisplayed());
     }
 }

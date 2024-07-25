@@ -10,13 +10,32 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.testng:testng:7.6.1'
-    implementation 'org.seleniumhq.selenium:selenium-java:4.5.0'
-    testImplementation 'io.github.bonigarcia:webdrivermanager:5.7.0'
+    testImplementation 'org.testng:testng:7.10.2'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.22.0'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.8.0'
+    implementation 'io.cucumber:cucumber-testng:7.18.0'
+    implementation 'io.cucumber:cucumber-core:7.18.0'
+    implementation 'io.cucumber:cucumber-java:7.18.0'
+    implementation 'io.cucumber:gherkin:27.0.0'
 }
 
 test {
     useTestNG() {
-        suites "src/test/resources/TestNG.xml"
+        suites System.getProperty("suite", "src/test/resources/TestNG.xml")
+        systemProperty "browser", System.getProperty("browser")
+    }
+}
+
+task testSmoke(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/Smoke.xml"
+        systemProperty "browser", System.getProperty("browser", "chrome")
+    }
+}
+
+task testRegression(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/Regression.xml"
+        systemProperty "browser", System.getProperty("browser", "chrome")
     }
 }
