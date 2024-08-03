@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -14,8 +15,9 @@ import org.testng.annotations.Parameters;
 import java.time.Duration;
 
 public class BaseTest {
-    public WebDriver driver;
-    public WebDriverWait wait;
+    public WebDriver driver = null;
+    public WebDriverWait wait = null;
+    public Actions actions = null;
 
 
     @BeforeSuite
@@ -30,8 +32,9 @@ public class BaseTest {
         options.addArguments("--remote-allow-origins=*", "--disable-notifications", "--incognito", "--start-maximized");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         driver = new ChromeDriver(options);
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        actions = new Actions(driver);
         navigateToPage(baseUrl);
 
     }
@@ -41,7 +44,8 @@ public class BaseTest {
     }
 
     public void navigateToPage(String url) {
-    driver.get(url);
+        driver.get(url);
+
     }
     public void provideEmail(String email){
         WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
