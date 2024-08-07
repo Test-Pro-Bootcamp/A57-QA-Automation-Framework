@@ -1,16 +1,16 @@
-package Pages;
+package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
+
     // Web Elements:
-    By playlistElement = By.cssSelector("#playlists > ul > li:nth-child(3)");
+    private By playlistElement = By.cssSelector("#playlists > ul > li:nth-child(3)");
 
 
     // Helper methods:
@@ -18,8 +18,6 @@ public class HomePage extends BasePage{
         WebElement playlist = findElement(playlistElement);
         actions.doubleClick(playlist).perform();
     }
-
-
 
 
 }

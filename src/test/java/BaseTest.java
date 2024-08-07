@@ -25,9 +25,10 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
 
     }
+
     @BeforeMethod
     @Parameters({"BaseUrl"})
-    public void launchBrowser(String baseUrl){
+    public void launchBrowser(String baseUrl) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*", "--disable-notifications", "--incognito", "--start-maximized");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
@@ -38,8 +39,9 @@ public class BaseTest {
         navigateToPage(baseUrl);
 
     }
+
     @AfterMethod
-    public void closeBrowser(){
+    public void closeBrowser() {
         driver.quit();
     }
 
@@ -47,17 +49,20 @@ public class BaseTest {
         driver.get(url);
 
     }
-    public void provideEmail(String email){
+
+    public void provideEmail(String email) {
         WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
         emailField.clear();
         emailField.sendKeys(email);
     }
-    public void providePassword (String password){
+
+    public void providePassword(String password) {
         WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
         passwordField.clear();
         passwordField.sendKeys(password);
     }
-    public void clickLoginBtn(){
+
+    public void clickLoginBtn() {
         WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
         submit.click();
 
