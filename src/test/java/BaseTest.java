@@ -15,9 +15,9 @@ import org.testng.annotations.Parameters;
 import java.time.Duration;
 
 public class BaseTest {
-    public WebDriver driver = null;
-    public WebDriverWait wait = null;
-    public Actions actions = null;
+    public static WebDriver driver;
+    public static WebDriverWait wait;
+    public static Actions actions;
 
 
     @BeforeSuite
